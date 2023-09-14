@@ -22,10 +22,10 @@ public class RemoveBotImpl implements RemoveBot {
 
     @Override
     public Map<String, String> remove(Map<String, String> data) {
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDetails loginuser = (UserDetailsImpl) usernamePasswordAuthenticationToken.getPrincipal();
-        User user = new User();
+        UsernamePasswordAuthenticationToken authenticationToken =
+                (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl loginUser = (UserDetailsImpl) authenticationToken.getPrincipal();
+        User user = loginUser.getUser();
         int bot_id = Integer.parseInt(data.get("bot_id"));
         Bot bot = botMapper.selectById(bot_id);
         Map<String,String> map = new HashMap<>();

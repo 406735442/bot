@@ -19,9 +19,9 @@ public class photoServiceImpl implements photoService {
 
     @Override
     public String changePhoto(Map<String, String> data) {
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+        UsernamePasswordAuthenticationToken authenticationToken =
                 (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl loginUser = (UserDetailsImpl) usernamePasswordAuthenticationToken.getPrincipal();
+        UserDetailsImpl loginUser = (UserDetailsImpl) authenticationToken.getPrincipal();
         User user = loginUser.getUser();
         int id = user.getId();
         user.setPhoto(data.get("photo"));
